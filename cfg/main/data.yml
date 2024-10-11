@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+#        Input data configuration
+# ------------------------------------------------------
+# This is an example used for single time series input
+data_labels:
+  fpr: "fpr"
+  tpr: "tpr"
+
+  # STEP3 is the model training step
+  step3:
+    ground_truth: "label"
+    prediction: "result"
+
+  # STEP4 is the model evaluation step
+  step4:
+    ground_truth: "label"
+    prediction: "result"
+
+  # STEP5 this step is used only by CD model
+  step5:
+    ground_truth: "cd_label"
+    prediction: "cd_result"

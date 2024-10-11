@@ -1,0 +1,380 @@
+# ------------------------------------------------------
+#           Specification of AD model parameters
+# ------------------------------------------------------
+model:
+  # Sub path for model training and detection models
+  path: "model/"
+  detection: "detection/"
+  result: "output/"
+  # Flag to determine whether to generate animated gifs for ROC curve generation
+  animation: False
+
+  # Anomaly detection model parameters specification
+  ad:
+
+    # ------------------------------------------------------------------------
+    # Baseline ADEF models
+    # ------------------------------------------------------------------------
+
+    # Threshold based detection
+    thb:
+      type: "stat"
+      name: "Threshold"
+      training: True
+      enabled: False
+      timeout: 300
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    bas:
+      type: "stat"
+      name: "Baseline"
+      training: True
+      enabled: False
+      timeout: 300
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+    # ------------------------------------------------------------------------
+    # SciKit-Learn models
+    # ------------------------------------------------------------------------
+    # DBSCAN algorithm parameters range used in training.
+    skl_dbscan:
+      type: "stat"
+      name: "DBSCAN"
+      import: "from sklearn.cluster import DBSCAN"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+      # filter:
+      #  before:
+      #    - sr:
+
+    # Support vector machines - problem with search parameters - model not properly trained
+    skl_svm:
+      type: "stat"
+      name: "SVM"
+      import: "from sklearn.svm import OneClassSVM"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: True
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # DONE - Stochastic Gradient Decent
+    skl_sgd:
+      type: "stat"
+      name: "SGD"
+      import: "from sklearn.linear_model import SGDClassifier"
+      training: True
+      enabled: True
+      timeout: 1200
+      continuous: True
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # Isolated forest
+    skl_isfor:
+      type: "stat"
+      name: "Isolated Forest"
+      import: "from sklearn.ensemble import IsolationForest"
+      training: True
+      enabled: False
+      timeout: 300
+      continuous: True
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # Local Outlier Factor - issue at detector level
+    skl_lof:
+      type: "stat"
+      name: "Local Outlier Factor"
+      import: "from sklearn.neighbors import LocalOutlierFactor"
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: True
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      #filter:
+      #  before:
+      #    - kalman:
+      #        transition_matrices:
+      #          - 1
+      #        observation_matrices:
+      #          - 1
+      #        initial_state_mean:
+      #          - 0
+      #        initial_state_covariance:
+      #          - 1
+      #        observation_covariance:
+      #          - 10
+      #        transition_covariance:
+      #          - 0.01
+      #    - derivative:
+
+      label: "label"
+      ext: "pkl"
+
+    # Standard k-means algorithm
+    skl_kmeans:
+      type: "stat"
+      name: "K-Means"
+      import: "from sklearn.cluster import KMeans"
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: True
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # Elliptic Envelopes
+    skl_elenv:
+      type: "stat"
+      name: "Elliptic Envelopes"
+      import: "from sklearn.covariance import EllipticEnvelope"
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+    # ------------------------------------------------------------------------
+    # PyOD models
+    # ------------------------------------------------------------------------
+    # Angle Between points Outlier Detection algorithm parameters range used in training.
+    pyod_abod:
+      type: "stat"
+      name: "PyOD-ABOD"
+      import: "from pyod.models.abod import ABOD"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    pyod_cof:
+      type: "stat"
+      name: "PyOD-COF"
+      import: "from pyod.models.cof import COF"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # Support vector machines - problem with search parameters - model not properly trained
+    pyod_ocsvm:
+      type: "stat"
+      name: "OD-OCSVM"
+      import: "from pyod.models.ocsvm import OCSVM"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # Isolated Forests algorithm
+    pyod_isfor:
+      type: "stat"
+      name: "PyOD Isolated Forests"
+      training: True
+      enabled: False
+      timeout: 300
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # Local Outlier Factor algorithm
+    pyod_lof:
+      type: "stat"
+      name: "PyOD Local Outlier Factor"
+      training: True
+      enabled: False
+      timeout: 300
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    # ------------------------------------------------------------------------
+    # Pytorch AD models
+    # ------------------------------------------------------------------------
+
+    # Autoencoder
+    pytorch_autoencoder:
+      type: "stat"
+      name: "PT_AUTOENC"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      knowledge: True
+      label: "label"
+      ext: "pth"
+
+    # LSTM - Long Short Term Memory
+    pytorch_lstm:
+      type: "stat"
+      name: "PT_LSTM"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      knowledge: True
+      label: "label"
+      ext: "pth"
+
+    # MLP - Multi-Layer Perceptron
+    pytorch_mlp:
+      type: "stat"
+      name: "PT_MLP"
+      training: True
+      enabled: False
+      timeout: 1200
+      continuous: False
+      knowledge: True
+      label: "label"
+      ext: "pth"
+
+    # Methods below are optional at the moment
+
+    # DBSCAN algorithm parameters range used in training.
+    hdbscan:
+      type: "stat"
+      name: "HDBSCAN"
+      import: "from hdbscan import HDBSCAN"
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+    # --------------------- Do not use models below the line - WIP -------------------------
+    # Fuzzy C-means
+    fcmeans:
+      type: "stat"
+      name: "Fuzzy C-Means"
+      import: "from fcmeans import FCM"
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+    # --------------------- Neural nets based models - WIP -------------------------
+    mlp:
+      type: "neural-net"
+      name: "MLP"
+      import: "from sklearn.neural_network import MLPClassifier"
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: True
+      label: "label"
+      ext: "pkl"
+
+    lstm:
+      type: "neural-net"
+      name: "LSTM"
+      import: ""
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+    knn:
+      type: "neural-net"
+      name: "KNN"
+      import: ""
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+    gnn:
+      type: "neural-net"
+      name: "GNN"
+      import: ""
+      training: True
+      enabled: False
+      timeout: 900
+      continuous: False
+      # Enable/disable apriori knowledge for anomaly detection process
+      knowledge: False
+      label: "label"
+      ext: "pkl"
+
+# Cycle detector configuration
+cycle_detector:
+  # Flag to enable local ADEF time window based algorithm
+  enabled: True
+  # Range for Tau values search in % of physical based process
+  tau:
+    # Start process
+    - -1
+    # Stop process
+    - 300
+  # Iteration step applied during Tau looping for ROC curve (1 .. max number of tau)
+  step: 1
+
+# CP model for best ROC curve point selection constraints definition
+selection:
+  constraints:
+    "d1_min": ">0"
+    "d1_avg": ">0"
+    "d1_max": ">0"
+
+    "d2_min": ">0"
+    "d2_avg": ">0"
+    "d2_max": ">0"

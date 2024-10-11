@@ -1,0 +1,28 @@
+# Metrics configuration file
+metrics:
+  # Delta 1 metric
+  d1:
+    # Maximum number of point after first detection where delta detection delay will be use to compute
+    # if detection delay i greater this value will be used as maximum.
+    max_search_limit: 30
+
+  # Delta 2 metric
+  d2:
+    # Additional time added to the max_search_limit value in case of detection delay computation for
+    # 'cycle detector' anomaly detection algorithm (STEP5) of the simulation
+    tau: 30
+  
+  # Metric filter used to block specific
+  filters:
+    # Training step
+    step3:
+      - d2
+
+    # Evaluation step
+    step4:
+      - d2
+
+    # Cycle detector step
+    step5:
+      - d1
+      - d2

@@ -1,0 +1,40 @@
+# ------------------------------------------------------
+#                 Results configuration
+# ------------------------------------------------------
+results:
+  # Sub path for experiment results
+  path: "graph/"
+  # This option optimize results size by
+  size:
+    # 1. Removing intermediary model and results files that weren't selected
+    # for detection.
+    remove_files: True
+
+  # Graph generation
+  graphs:
+    enabled: 1
+
+    # Confusion Matrix configuration
+    cf: 1
+
+    # Receiver Operational Characteristics configuration
+    roc: 1
+
+  # Convert CSV data into LaTeX tables
+  latex:
+    enabled: True
+    path: "output/latex/"
+    copy_images: "output/latex/images"
+    results: ["AD", "CD"]
+
+  # Generate powerpoint slides from experiment result
+  ppt:
+    enabled: True
+    template: "./cfg/ppt/cps_template.pptx"
+    all_slides_count: 10
+    path: "output/ppt/"
+    # Level of detail used in presentation generation
+    # - brief generates only ML/CD ROC comparison slides only - other ROC slides are removed
+    # - full adds all slides
+    detail: "brief"
+

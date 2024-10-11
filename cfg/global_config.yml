@@ -1,0 +1,41 @@
+# Copyright by Piotr Sobonski UCC 2021-2026
+
+# Global configuration to set up multiple CPS anomaly detection doe
+global:
+  # General number of detection examples
+  detection:
+    limit: 100
+  # Automatic shutdown after experiment stop
+  autoshutdown: False
+  # Global cache folder
+  cache: "./cache/"
+  # Global experiment path folder for all doe
+  path: "../exp/perf_test/"
+  attacks_selection:
+    attacks:
+      - coff
+      - nois
+      - noff
+      - hnfl
+      - plcn
+      - seac
+      - seto
+
+experiments:
+  baseline:
+    # Human-readable short identifier
+    id: "Baseline"
+    # Experiment description
+    descr: "100 train/100 test cycles with background temperature sensor"
+    # Sub experiment path combined with global path
+    path: "baseline/"
+    # List of commands to be executed before running experimentation
+    pre:
+      cycle_loop:
+        - 100
+
+# List of post activities to be executed after
+# all doe are finished
+post:
+  # - ./adef_post.py -c ./cfg/exp_p_norm/post.yml
+  # path: "../exp/a1_down/summary"

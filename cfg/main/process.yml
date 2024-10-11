@@ -1,0 +1,81 @@
+# ------------------------------------------------------
+#      Industrial Control System model configuration
+# ------------------------------------------------------
+
+process:
+
+  # Sub-path where process generation files will be sorted
+  path: "input/"
+
+  # Input file that supplies input data to ADEF for ICS Model
+  in_file: ""
+
+  # Number of temperature test cycles used in training
+  cycles: 100
+
+  # Number of different temperature cycles used in detection
+  detection_cycles: 100
+
+  # Length of the cycle in data samples
+  cycle_len: 50
+
+  # Number of samples per single unit of measurement (frequency)
+  samples: 6
+
+  # Error allowable limit in manufacturing environment
+  # (% of errors that can be skipped - manually handled)
+  limit: 3
+
+  # Maximum value on the input graphs
+  max_value: 225
+
+  # Generate room temp and autoclave temp profile
+  profile:
+    # To generate new data set the flag to 1
+    # otherwise data will be loaded from the file (flag = 0)
+    enabled: 1
+    # Output data file
+    file: "data_area1_3K_DN.csv"
+    # Thermal process parameters
+    temp:
+      optimal_heating:
+        - 182
+        # - 185
+      room:
+        # - 18
+        - 19
+
+    duration:
+      set:
+        -
+          - 45
+        #  - 55
+        -
+        #  - 90
+          - 110
+        -
+          - 180
+        #  - 240
+        -
+        #  - 245
+          - 260
+
+  # Environmental ICS model influence inputs
+  # environment:
+
+    # Input background influence file
+    # in_file: "" # ./cfg/env/trend_down.csv"
+
+    # Input columns/features that will be imported
+    # in_col:
+    #   - "temp"
+
+    # Number of top rows 
+    # ignore_rows: 0
+
+    # Time stamp format inside timeseries data set
+    # date_format: "%m/%d/%Y %H:%M"
+
+    # Flag used to block environmental influence 
+    # addition in AD model evaluation phase
+    # exclude_test: False # True

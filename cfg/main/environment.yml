@@ -1,0 +1,19 @@
+# Environmental ICS model influence inputs
+environment:
+
+  # Input background influence file
+  in_file: "" # ./cfg/env/trend_down.csv"
+
+  # Input columns/features that will be imported
+  in_col:
+  #   - "temp"
+
+  # Number of top rows
+  ignore_rows: 0
+
+  # Time stamp format inside timeseries data set
+  date_format: "%m/%d/%Y %H:%M"
+
+  # Flag used to block environmental influence
+  # addition in AD model evaluation phase
+  exclude_test: False # True
